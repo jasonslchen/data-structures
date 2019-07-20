@@ -74,6 +74,7 @@ BSTMethods.depthFirstLog = function(cb) {
 }
 /*
  * Complexity: What is the time complexity of the above functions?
+ all are O(n);
  */
 
 // let tree = BinarySearchTree(5);
