@@ -1,52 +1,89 @@
 var BinarySearchTree = function(value) {
+  let BST = Object.create(BSTMethods);
 
-  this.value = value;
-  this.left = null;
-  this.right = null;
+  BST.value = value;
+  BST.left = null;
+  BST.right = null;
+
+  return BST;
 
 };
 
+let BSTMethods = {};
 
+BSTMethods.insert = function(val) {
 
-BinarySearchTree.prototype.insert = function(val) {
-//call right and left
-//whichever return true insert value at that children(position);
-  // if(value > this.value) {
-  //   this.right = value;
-  // } else if (value < this.value) {
-  //   this.left = value;
-  // }
-  let current = this.value;
-  let insertion = function(node) {
-
-
+  if (val < this.value) {
+    if (!this.left) {
+      this.left = BinarySearchTree(val);
+    } else {
+      this.left.insert(val);
+    }
   }
 
-  insertion(this);
+  if (val > this.value) {
+    if (!this.right) {
+      this.right = BinarySearchTree(val);
+    } else {
+      this.right.insert(val);
+    }
+  }
+
+  if (val === this.value) {
+    return 'value already present';
+  }
 
 }
 
-BinarySearchTree.prototype.contains = function(value) {
+BSTMethods.contains = function(val) {
+  // let result = false;
+  if (val === this.value) {
+    return true;
+  } else if (val < this.value) {
+    if (!this.left) {
+      return false;
+    } else {
+      return this.left.contains(val);
+    }
+  } else if (val > this.value) {
+    if (!this.right) {
+      return false;
+    } else {
+      return this.right.contains(val);
+    }
+  }
 
-  //recurse through tree checking values
+
+
 
 }
 
-BinarySearchTree.prototype.depthFirstLog = function(cb) {
+BSTMethods.depthFirstLog = function(cb) {
+  if (this.value) {
+    cb(this.value);
+  }
 
-  // let each = function(node, call) {
-  //   if (node.value) {
+  if (this.left) {
+    this.left.depthFirstLog(cb);
+  }
 
-  //   }
-  // }
+  if (this.right) {
+    this.right.depthFirstLog(cb);
+  }
+
 }
 /*
  * Complexity: What is the time complexity of the above functions?
  */
 
- let tree = new BinarySearchTree(5)
+// let tree = BinarySearchTree(5);
 
- tree = {value: 5, left: null, right: null}
+// tree = {
+//   left:
+//   right:
+//   value:
+// }
 
- tree.insert
+// tree.insert();
+
 
