@@ -14,25 +14,23 @@ HashTable.prototype.resize = function(size) {
     arraylength = this._limit/2;
   }
 
+  let temp = this._storage;
+
   this._storage = LimitedArray(arraylength);
 
   let container = this._storage;
 
-  let currentTuples = [];
 
+  temp.each(function(bucket) {
+    if (bucket) {
 
-  container.each(function(bucket) {
-    if (bucket.length > 0) {
       for (let i = 0; i < bucket.length; i++) {
-        currentTuples.push([bucket[i]]);
+        let k = bucket[i][0];
+        let v = bucket[i][1];
+        container.insert(k, v);
       }
     }
   })
-
-  for (let i = 0; i < currentTuples.length; i++) {
-    container.insert(currentTuples[i][0], currentTuples[i][1]);
-  }
-
 
 };
 
